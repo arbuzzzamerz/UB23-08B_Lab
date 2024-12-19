@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Онлайн магазин одежды</title>
+    <link rel="stylesheet" href="styles/normalize.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #007bff;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        input, select, textarea, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #007bff;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 4px rgba(0, 123, 255, 0.5);
+        }
+
+        textarea {
+            resize: none;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .fieldset {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .fieldset legend {
+            font-weight: bold;
+            color: #555;
+        }
+
+        .form-section {
+            margin-top: 20px;
+        }
+
+        .form-section h2 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #444;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table th, table td {
+            border: 1px solid #ddd;
+            text-align: center;
+            padding: 10px;
+        }
+
+        table th {
+            background-color: #f4f4f9;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Оформление заказа</h1>
+        
+        <div class="form-section">
+            <h2>Артикулы товаров</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Товар 1</th>
+                        <th>Товар 2</th>
+                        <th>Товар 3</th>
+                        <th>Товар 4</th>
+                        <th>Товар 5</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="text" name="item1" placeholder="Артикул"></td>
+                        <td><input type="text" name="item2" placeholder="Артикул"></td>
+                        <td><input type="text" name="item3" placeholder="Артикул"></td>
+                        <td><input type="text" name="item4" placeholder="Артикул"></td>
+                        <td><input type="text" name="item5" placeholder="Артикул"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <form id="orderForm" onsubmit="return validateForm()">
+            <div class="form-section">
+                <label for="surname">Фамилия:</label>
+                <input type="text" id="surname" name="surname" placeholder="Введите фамилию">
+
+                <label for="name">Имя:</label>
+                <input type="text" id="name" name="name" placeholder="Введите имя">
+
+                <label for="patronymic">Отчество:</label>
+                <input type="text" id="patronymic" name="patronymic" placeholder="Введите отчество">
+            </div>
+
+            <div class="form-section">
+                <label for="size">Размер одежды:</label>
+                <select id="size" name="size">
+                    <option value="XS">XS</option>
+                    <option value="S">S</option>
+                    <option value="M">M</option>
+                    <option value="L">L</option>
+                    <option value="XL">XL</option>
+                    <option value="XXL">XXL</option>
+                </select>
+
+                <label for="tel">Контактный телефон:</label>
+                <input type="tel" id="tel" name="tel" placeholder="+7 (___) ___-__-__">
+
+                <label for="address">Домашний адрес:</label>
+                <input type="text" id="address" name="address" placeholder="Введите адрес">
+
+                <label for="email">Электронная почта:</label>
+                <input type="email" id="email" name="email" placeholder="Введите email">
+            </div>
+
+            <fieldset class="fieldset">
+                <legend>Согласие на обработку данных</legend>
+                <label><input type="checkbox" name="consent"> Я согласен с политикой конфиденциальности</label>
+            </fieldset>
+
+            <button type="submit">Подтвердить заказ</button>
+        </form>
+    </div>
+
+    <script>
+        function validateForm() {
+            var surname = document.getElementById("surname").value;
+            var name = document.getElementById("name").value;
+            var tel = document.getElementById("tel").value;
+            var email = document.getElementById("email").value;
+
+            if (!surname || !name || !tel || !email) {
+                alert("Заполните все обязательные поля!");
+                return false;
+            }
+
+            if (!/\+?\d{11}/.test(tel)) {
+                alert("Введите корректный номер телефона!");
+                return false;
+            }
+
+            if (!/\S+@\S+\.\S+/.test(email)) {
+                alert("Введите корректный email!");
+                return false;
+            }
+
+            alert("Форма успешно отправлена!");
+            return true;
+        }
+    </script>
+</body>
+
+</html>

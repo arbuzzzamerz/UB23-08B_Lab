@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Онлайн магазин одежды</title>
+    <link rel="stylesheet" href="styles/normalize.css" />
+    <link rel="stylesheet" href="styles/style.css" />
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #2c2c2c; /* Темный фон */
+            color: #f9f9f9; /* Светлый текст */
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #3b3b3b; /* Темный блок */
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2em;
+            color: #f39c12; /* Акцентный желтый */
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            margin-bottom: 20px;
+            border-collapse: collapse;
+            background-color: #4a4a4a; /* Более светлый темный */
+            border-radius: 8px;
+        }
+
+        table td {
+            border: 1px solid #555;
+            padding: 10px;
+            text-align: center;
+            color: #f9f9f9;
+        }
+
+        textarea {
+            resize: none;
+            background-color: #2c2c2c;
+            color: #f9f9f9;
+            border: 1px solid #555;
+            border-radius: 4px;
+            padding: 5px;
+            width: 60px;
+            height: 30px;
+        }
+
+        label {
+            display: block;
+            margin: 15px 0 5px;
+            font-size: 1rem;
+            color: #eaeaea;
+        }
+
+        input, select {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 15px;
+            background-color: #2c2c2c;
+            color: #f9f9f9;
+            border: 1px solid #555;
+            border-radius: 4px;
+        }
+
+        input::placeholder {
+            color: #888;
+        }
+
+        .send_button {
+            background-color: #f39c12; /* Желтая кнопка */
+            color: #2c2c2c;
+            font-size: 1.2rem;
+            border: none;
+            padding: 15px;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-weight: bold;
+            border-radius: 5px;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        .send_button:hover {
+            background-color: #d87f00; /* Темно-желтый при наведении */
+        }
+
+        fieldset {
+            border: 1px solid #555;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        legend {
+            font-size: 1.1rem;
+            color: #f39c12;
+        }
+
+        .tablet {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <form>
+            <h1>Оформление заказа</h1>
+            <div class="tablet">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Артикул товара</td>
+                            <td><textarea id="book_number" name="book_number"></textarea></td>
+                            <td><textarea id="book_number" name="book_number"></textarea></td>
+                            <td><textarea id="book_number" name="book_number"></textarea></td>
+                            <td><textarea id="book_number" name="book_number"></textarea></td>
+                            <td><textarea id="book_number" name="book_number"></textarea></td>
+                            <td><textarea id="book_number" name="book_number"></textarea></td>
+                            <td><textarea id="book_number" name="book_number"></textarea></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </form>
+
+        <form>
+            <label for="surname">Фамилия:</label>
+            <input type="text" id="surname" name="surname" placeholder="Фамилия" />
+
+            <label for="name">Имя:</label>
+            <input type="text" id="name" name="name" placeholder="Имя" />
+
+            <label for="patronymic">Отчество:</label>
+            <input type="text" id="patronymic" name="patronymic" placeholder="Отчество" />
+
+            <label for="select">Размер одежды:</label>
+            <select name="select" id="select">
+                <option value="value" selected>XS</option>
+                <option value="value2">S</option>
+                <option value="value3">M</option>
+                <option value="value4">L</option>
+                <option value="value5">XL</option>
+                <option value="value6">XXL</option>
+            </select>
+
+            <label for="tel">Контактный телефон:</label>
+            <input type="tel" id="tel" name="tel" placeholder="Номер телефона +7 (___) ___-__-__" />
+
+            <label for="adress">Домашний адрес:</label>
+            <input type="text" id="adress" name="adress" placeholder="Домашний адрес" />
+
+            <label for="email">Адрес электронной почты:</label>
+            <input type="email" id="email" name="email" placeholder="Адрес электронной почты" />
+
+            <fieldset>
+                <legend>Предоставьте согласие</legend>
+                <label><input type="radio" name="consent" value="pers_data"> Я ознакомлен/а с Политикой конфиденциальности и согласен/на на обработку персональных данных</label>
+            </fieldset>
+
+            <button class="send_button" type="submit">Подтвердить заказ</button>
+        </form>
+    </div>
+</body>
+
+</html>
+7

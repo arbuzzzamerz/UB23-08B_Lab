@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Калькулятор</title>
+    <style>
+        button {
+            width: 60px;
+            height: 60px;
+            font-size: 18px;
+            margin: 5px;
+            border: none;
+            border-radius: 10px;
+            background-color: #f4f4f4;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        button:hover {
+            background-color: #e0e0e0;
+            box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        button:active {
+            background-color: #d0d0d0;
+            box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        body {
+            display: flex;
+            height: 100vh;
+            align-items: center;
+            justify-content: center;
+            background-color: #1b1f3a;
+            margin: 0;
+        }
+
+        .container {
+            position: relative;
+            width: 320px;
+            padding: 20px;
+            border-radius: 20px;
+            background: linear-gradient(145deg, #252b48, #1a1e35);
+            box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3), -5px -5px 15px rgba(255, 255, 255, 0.05);
+        }
+
+        input[type="text"] {
+            width: 100%;
+            height: 60px;
+            font-size: 24px;
+            text-align: right;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 10px;
+            box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            background-color: #2e3658;
+            color: #ffffff;
+        }
+
+        input[type="text"]:disabled {
+            background-color: #3a4269;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <input type="text" id="display" disabled>
+        <div class="row">
+            <button onclick="appendToDisplay(7)">7</button>
+            <button onclick="appendToDisplay(8)">8</button>
+            <button onclick="appendToDisplay(9)">9</button>
+            <button onclick="clearDisplay()">C</button>
+        </div>
+        <div class="row">
+            <button onclick="appendToDisplay(4)">4</button>
+            <button onclick="appendToDisplay(5)">5</button>
+            <button onclick="appendToDisplay(6)">6</button>
+            <button onclick="backspace()">←</button>
+        </div>
+        <div class="row">
+            <button onclick="appendToDisplay(1)">1</button>
+            <button onclick="appendToDisplay(2)">2</button>
+            <button onclick="appendToDisplay(3)">3</button>
+            <button onclick="changeSign()">+/-</button>
+        </div>
+        <div class="row">
+            <button onclick="appendToDisplay(0)">0</button>
+            <button onclick="appendToDisplay('.')">.</button>
+            <button onclick="calculate()">=</button>
+            <button onclick="operation('+')">+</button>
+        </div>
+        <div class="row">
+            <button onclick="operation('-')">-</button>
+            <button onclick="operation('*')">*</button>
+            <button onclick="operation('/')">/</button>
+            <button onclick="squareRoot()">√</button>
+        </div>
+        <div class="row">
+            <button onclick="inverse()">1/x</button>
+            <button onclick="percentage()">%</button>
+            <button style="visibility: hidden;"></button>
+            <button style="visibility: hidden;"></button>
+        </div>
+    </div>
+
+    <script>
+        var display = document.getElementById('display');
+        var operand1 = '';
+        var operand2 = '';
+        var operator = '';
+        var result = '';
+
+        function appendToDisplay(value) {
+            if (result !== '') {
+                clearDisplay();
+                result = '';
+            }
+            display.value += value;
+        }
+
+        function clearDisplay() {
+            display.value = '';
+        }
+
+        function backspace() {
+            display.value = display.value.slice(0, -1);
+        }
+
+        function changeSign() {
+            display.value = parseFloat(display.value) * -1;
+        }
+
+        function operation(op) {
+            operand1 = display.value;
+            operator = op;
+            clearDisplay();
+        }
+
+        function calculate() {
+            operand2 = display.value;
+            if (operand1 !== '' && operand2 !== '') {
+                switch (operator) {
+                    case '+':
+                        result = parseFloat(operand1) + parseFloat(operand2);
+                        break;
+                    case '-':
+                        result = parseFloat(operand1) - parseFloat(operand2);
+                        break;
+                    case '*':
+                        result = parseFloat(operand1) * parseFloat(operand2);
+                        break;
+                    case '/':
+                        result = parseFloat(operand1) / parseFloat(operand2);
+                        break;
+                }
+                display.value = result;
+                operand1 = '';
+                operand2 = '';
+                operator = '';
+            }
+        }
+
+        function inverse() {
+            if (display.value !== '') {
+                display.value = 1 / parseFloat(display.value);
+            }
+        }
+
+        function squareRoot() {
+            if (display.value !== '') {
+                display.value = Math.sqrt(parseFloat(display.value));
+            }
+        }
+
+        function percentage() {
+            if (display.value !== '') {
+                display.value = parseFloat(display.value) / 100;
+            }
+        }
+    </script>
+</body>
+</html>
