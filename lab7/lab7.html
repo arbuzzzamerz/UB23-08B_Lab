@@ -132,7 +132,9 @@
         }
 
         function changeSign() {
-            display.value = parseFloat(display.value) * -1;
+            if (display.value !== '') {
+                display.value = parseFloat(display.value) * -1;
+            }
         }
 
         function operation(op) {
@@ -144,21 +146,30 @@
         function calculate() {
             operand2 = display.value;
             if (operand1 !== '' && operand2 !== '') {
-                switch (operator) {
-                    case '+':
-                        result = parseFloat(operand1) + parseFloat(operand2);
-                        break;
-                    case '-':
-                        result = parseFloat(operand1) - parseFloat(operand2);
-                        break;
-                    case '*':
-                        result = parseFloat(operand1) * parseFloat(operand2);
-                        break;
-                    case '/':
-                        result = parseFloat(operand1) / parseFloat(operand2);
-                        break;
+                try {
+                    switch (operator) {
+                        case '+':
+                            result = parseFloat(operand1) + parseFloat(operand2);
+                            break;
+                        case '-':
+                            result = parseFloat(operand1) - parseFloat(operand2);
+                            break;
+                        case '*':
+                            result = parseFloat(operand1) * parseFloat(operand2);
+                            break;
+                        case '/':
+                            if (parseFloat(operand2) === 0) {
+                                throw new Error('Деление на ноль невозможно');
+                            }
+                            result = parseFloat(operand1) / parseFloat(operand2);
+                            break;
+                        default:
+                            throw new Error('Неизвестная операция');
+                    }
+                    display.value = result;
+                } catch (error) {
+                    display.value = error.message;
                 }
-                display.value = result;
                 operand1 = '';
                 operand2 = '';
                 operator = '';
@@ -166,14 +177,24 @@
         }
 
         function inverse() {
-            if (display.value !== '') {
+            try {
+                if (display.value === '' || parseFloat(display.value) === 0) {
+                    throw new Error('Невозможно вычислить обратное значение');
+                }
                 display.value = 1 / parseFloat(display.value);
+            } catch (error) {
+                display.value = error.message;
             }
         }
 
         function squareRoot() {
-            if (display.value !== '') {
+            try {
+                if (display.value === '' || parseFloat(display.value) < 0) {
+                    throw new Error('Невозможно вычислить корень из отрицательного числа');
+                }
                 display.value = Math.sqrt(parseFloat(display.value));
+            } catch (error) {
+                display.value = error.message;
             }
         }
 
